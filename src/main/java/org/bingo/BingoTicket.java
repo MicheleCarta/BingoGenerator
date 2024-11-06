@@ -19,7 +19,7 @@ public class BingoTicket {
         fillTicket();
     }
 
-    public void fillTicket() {
+    private void fillTicket() {
 
         for (int col = 0; col < columnRanges.length; col++) {
             List<Integer> columnNumbers = generateUniqueColumnNumbers(columnRanges[col]);
@@ -28,28 +28,6 @@ public class BingoTicket {
         }
         finalizeTicket();
         sortColumns();
-    }
-
-    public void markNumber(int number) {
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 9; col++) {
-                if (ticket[row][col] == number) {
-                    ticket[row][col] = -1;
-                    return;
-                }
-            }
-        }
-    }
-
-    public boolean isNumberMarked(int number) {
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 9; col++) {
-                if (ticket[row][col] == number) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     private List<Integer> generateUniqueColumnNumbers(int[] range) {
@@ -75,8 +53,7 @@ public class BingoTicket {
         }
     }
 
-
-    public void finalizeTicket() {
+    private void finalizeTicket() {
         for (int[] row : ticket) {
             List<Integer> filledColumns = new ArrayList<>();
             Collections.sort(filledColumns);
@@ -109,8 +86,7 @@ public class BingoTicket {
         }
     }
 
-
-    public void sortColumns() {
+    private void sortColumns() {
         for (int col = 0; col < 9; col++) {
             List<Integer> numbers = new ArrayList<>();
 
@@ -131,11 +107,9 @@ public class BingoTicket {
         }
     }
 
-
     public int[][] getTicket() {
         return ticket;
     }
-
 
     public void printTicket() {
         for (int[] row : ticket) {
@@ -144,6 +118,28 @@ public class BingoTicket {
             }
             System.out.println();
         }
+    }
+
+    public void markNumber(int number) {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (ticket[row][col] == number) {
+                    ticket[row][col] = -1;
+                    return;
+                }
+            }
+        }
+    }
+
+    public boolean isNumberMarked(int number) {
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (ticket[row][col] == number) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

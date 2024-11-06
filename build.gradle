@@ -1,0 +1,35 @@
+plugins {
+	id 'groovy'
+	id 'jacoco'
+	id 'application'
+}
+
+group = 'org.bingo'
+
+mainClassName = 'org.bingo.Main'
+
+
+apply from: 'test.gradle'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+defaultTasks 'clean', 'classes', 'testClasses', 'check', 'assemble'
+
